@@ -40,7 +40,8 @@ function buildLightbox(lightboxImageSrc, photos, lightboxImageTitle) {
 		// Create left navigation arrow and add it to container
 		var leftArrow = document.createElement("img");
 		leftArrow.src = "../img/leftArrow.png";
-		leftArrow.id = "leftArrow";
+		//leftArrow.id = "leftArrow";
+    leftArrow.id = lightboxImageTitle + "leftarrow";
 		leftArrow.className = "leftArrow";
 		leftArrow.style.marginTop = -(image.height + (image.height/3)) / 2;
 		leftArrow.style.marginLeft = 5;
@@ -50,7 +51,8 @@ function buildLightbox(lightboxImageSrc, photos, lightboxImageTitle) {
 		var rightArrow = document.createElement("img");
 		rightArrow.src = "../img/rightArrow.png";
 		rightArrow.className = "rightArrow";
-		rightArrow.id = "rightArrow";
+		//rightArrow.id = "rightArrow";
+    rightArrow.id = lightboxImageTitle + "rightarrow";
 		rightArrow.style.marginTop = -(image.height + (image.height/3)) / 2;
 		rightArrow.style.marginLeft = image.width - 65;
 		container.appendChild(rightArrow);
@@ -88,7 +90,7 @@ function iterateThroughGallery(e, photos) {
         increment--;
         atEnd = false;
         for (var i = 0; i < photos.length; i++) {
-            if (e.target.id == "leftArrow") {
+            if (e.target.id == photos[i].title + "leftarrow") {
                 buildNextImage(i, photos, increment);
             }
         }
@@ -98,7 +100,7 @@ function iterateThroughGallery(e, photos) {
         increment++;
         atBeginning = false;
         for (var i = 0; i < photos.length; i++) {
-            if (e.target.id == "rightArrow" && i != photos.length - 1) {
+            if (e.target.id == photos[i].title + "rightarrow" && i != photos.length - 1) {
                 buildNextImage(i, photos, increment, e);
             }
         }
@@ -127,10 +129,10 @@ function buildNextImage(i, photos, increment, e) {
     var container = document.getElementById("container");
     container.style.marginTop = -image.height / 2 + window.pageYOffset;
     container.style.marginLeft = -image.width / 2;
-    var leftArrow = document.getElementById("leftArrow");
+    var leftArrow = document.getElementById(photos[i].title + "leftarrow");
     leftArrow.style.marginTop = -(image.height + (image.height/3)) / 2;
 		leftArrow.style.marginLeft = 5;
-    var rightArrow = document.getElementById("rightArrow");
+    var rightArrow = document.getElementById(photos[i].title + "rightarrow");
     rightArrow.style.marginTop = -(image.height + (image.height/3)) / 2;
     rightArrow.style.marginLeft = image.width - 65;
 
